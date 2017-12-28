@@ -3,7 +3,8 @@ using Cosmetic.Bussiness.Requests;
 using Cosmetic.Bussiness.Responses;
 using Cosmetic.Core.Request;
 using Cosmetic.Core.Response;
-using Cosmetic.DataModel.Model;
+using Cosmetic.DataModel;
+using Cosmetic.DataModel.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,7 +32,7 @@ namespace Cosmetic.Bussiness.Bussiness
             var response = new CosApiResponse();
             try
             {
-                using (var _db = new CosContext())
+                using (var _db = new CosmeticsContext())
                 {
                     var Cate = requests.Category;
                     if(string.IsNullOrEmpty(Cate.Id))
@@ -73,7 +74,7 @@ namespace Cosmetic.Bussiness.Bussiness
             var response = new CosApiResponse();
             try
             {
-                using (var _db = new CosContext())
+                using (var _db = new CosmeticsContext())
                 {
                     /* delete */
                     var cateDB = _db.Categories.Where(x => x.Id == request.ID).FirstOrDefault();
@@ -101,7 +102,7 @@ namespace Cosmetic.Bussiness.Bussiness
             var response = new CosApiResponse();
             try
             {
-                using (var _db = new CosContext())
+                using (var _db = new CosmeticsContext())
                 {
                     GetListCategoryResponse result = new GetListCategoryResponse();
                     var query = _db.Categories.Where(x => true);
@@ -125,7 +126,7 @@ namespace Cosmetic.Bussiness.Bussiness
             var response = new CosApiResponse();
             try
             {
-                using (var _db = new CosContext())
+                using (var _db = new CosmeticsContext())
                 {
                     GetIDCategoryResponse result = new GetIDCategoryResponse();
                     var cateDB = _db.Categories.Where(x => x.Id == request.ID).FirstOrDefault();

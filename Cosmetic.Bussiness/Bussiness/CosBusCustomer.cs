@@ -3,16 +3,15 @@ using Cosmetic.Bussiness.Requests;
 using Cosmetic.Bussiness.Responses;
 using Cosmetic.Core.Request;
 using Cosmetic.Core.Response;
-using Cosmetic.DataModel.Model;
+using Cosmetic.DataModel;
+using Cosmetic.DataModel.Entities;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Cosmetic.Bussiness.Bussiness
 {
-   public class CosBusCustomer
+    public class CosBusCustomer
     {
         protected static CosBusCustomer _instance;
         public static CosBusCustomer Instance
@@ -30,7 +29,7 @@ namespace Cosmetic.Bussiness.Bussiness
             var response = new CosApiResponse();
             try
             {
-                using (var _db = new CosContext())
+                using (var _db = new CosmeticsContext())
                 {
                     var customer = request.Customer;
                     if (string.IsNullOrEmpty(customer.Id)) /* insert */
@@ -72,7 +71,7 @@ namespace Cosmetic.Bussiness.Bussiness
             var response = new CosApiResponse();
             try
             {
-                using (var _db = new CosContext())
+                using (var _db = new CosmeticsContext())
                 {
                     /* delete */
                     var customerDB = _db.Customers.Where(o => o.Id == request.ID /*&& o.Status == Constants.Estatus.Active*/ ).FirstOrDefault();
@@ -101,7 +100,7 @@ namespace Cosmetic.Bussiness.Bussiness
             var response = new CosApiResponse();
             try
             {
-                using (var _db = new CosContext())
+                using (var _db = new CosmeticsContext())
                 {
                     GetDetailCustomerResponse result = new GetDetailCustomerResponse();
 
@@ -139,7 +138,7 @@ namespace Cosmetic.Bussiness.Bussiness
             var response = new CosApiResponse();
             try
             {
-                using (var _db = new CosContext())
+                using (var _db = new CosmeticsContext())
                 {
                     GetListCustomerResponse result = new GetListCustomerResponse();
 

@@ -3,11 +3,10 @@ using Cosmetic.Bussiness.Requests;
 using Cosmetic.Bussiness.Responses;
 using Cosmetic.Core.Request;
 using Cosmetic.Core.Response;
-using Cosmetic.DataModel.Model;
+using Cosmetic.DataModel;
+using Cosmetic.DataModel.Entities;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Cosmetic.Bussiness.Bussiness
@@ -30,7 +29,7 @@ namespace Cosmetic.Bussiness.Bussiness
             var response = new CosApiResponse();
             try
             {
-                using (var _db = new CosContext())
+                using (var _db = new CosmeticsContext())
                 {
                     var role = request.Role;
                     if (string.IsNullOrEmpty(role.Id)) /* insert */
@@ -41,7 +40,7 @@ namespace Cosmetic.Bussiness.Bussiness
                             Id = role.Id,
                             Name = role.Name,                            
                             RoleLevel = role.RoleLevel,                            
-                            ModulesId = role.ModulesId,                            
+                            ModuleId = role.ModuleId,                            
                         };
                         _db.Roles.Add(roleDB);
                     }
@@ -69,7 +68,7 @@ namespace Cosmetic.Bussiness.Bussiness
             var response = new CosApiResponse();
             try
             {
-                using (var _db = new CosContext())
+                using (var _db = new CosmeticsContext())
                 {
                     /* delete */
                     var RoleDB = _db.Roles.Where(o => o.Id == request.ID /*&& o.Status == Constants.Estatus.Active*/ ).FirstOrDefault();
@@ -97,7 +96,7 @@ namespace Cosmetic.Bussiness.Bussiness
             var response = new CosApiResponse();
             try
             {
-                using (var _db = new CosContext())
+                using (var _db = new CosmeticsContext())
                 {
                     GetDetailRoleResponse result = new GetDetailRoleResponse();
 
@@ -110,7 +109,7 @@ namespace Cosmetic.Bussiness.Bussiness
                             Id = RoleDB.Id,
                             Name = RoleDB.Name,
                             RoleLevel= RoleDB.RoleLevel,                          
-                            ModulesId = RoleDB.ModulesId,                            
+                            ModuleId = RoleDB.ModuleId,                            
                         };
                         result.Role = responseRole;
                         response.Data = result;
@@ -131,7 +130,7 @@ namespace Cosmetic.Bussiness.Bussiness
             var response = new CosApiResponse();
             try
             {
-                using (var _db = new CosContext())
+                using (var _db = new CosmeticsContext())
                 {
                     GetListRoleResponse result = new GetListRoleResponse();
 
@@ -142,7 +141,7 @@ namespace Cosmetic.Bussiness.Bussiness
                     {
                         Id = o.Id,
                         Name = o.Name,
-                        ModulesId =o.ModulesId,
+                        ModuleId =o.ModuleId,
                         RoleLevel = o.RoleLevel,                        
                         
                     }).ToList();

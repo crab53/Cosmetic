@@ -9,7 +9,7 @@ namespace Cosmetic.Bussiness.DTO
    public class RoleDTO:BaseDTO
     {
         public int RoleLevel { get; set; }
-        public string ModulesId { get; set; }
+        public string ModuleId { get; set; }
 
     }
 }

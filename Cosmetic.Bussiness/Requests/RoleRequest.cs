@@ -1,10 +1,5 @@
 ﻿using Cosmetic.Core.Request;
-using Cosmetic.DataModel.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Cosmetic.DataModel.Entities;
 
 namespace Cosmetic.Bussiness.Requests
 {

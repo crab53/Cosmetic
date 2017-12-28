@@ -1,15 +1,13 @@
 ﻿using Cosmetic.Core.Response;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Cosmetic.DataModel.Model;
 using Cosmetic.Bussiness.DTO;
 using Cosmetic.Core.Request;
 using Cosmetic.Bussiness.Requests;
-using Cosmetic.Core.Common;
 using Cosmetic.Bussiness.Responses;
+using Cosmetic.DataModel;
+using Cosmetic.DataModel.Entities;
 
 namespace Cosmetic.Bussiness.Bussiness
 {
@@ -32,7 +30,7 @@ namespace Cosmetic.Bussiness.Bussiness
             var response = new CosApiResponse();
             try
             {
-                using (var _db = new CosContext())
+                using (var _db = new CosmeticsContext())
                 {
                     var pro = request.Pro;
                     if (string.IsNullOrEmpty(pro.ID)) /* insert */
@@ -73,7 +71,7 @@ namespace Cosmetic.Bussiness.Bussiness
             var response = new CosApiResponse();
             try
             {
-                using (var _db = new CosContext())
+                using (var _db = new CosmeticsContext())
                 {
                     /* delete */
                     var proDB = _db.Products.Where(o => o.Id == request.ID /*&& o.Status == Constants.Estatus.Active*/ ).FirstOrDefault();
@@ -102,7 +100,7 @@ namespace Cosmetic.Bussiness.Bussiness
             var response = new CosApiResponse();
             try
             {
-                using (var _db = new CosContext())
+                using (var _db = new CosmeticsContext())
                 {
                     GetIDProductResponse result = new GetIDProductResponse();
                     
@@ -134,7 +132,7 @@ namespace Cosmetic.Bussiness.Bussiness
             var response = new CosApiResponse();
             try
             {
-                using (var _db = new CosContext())
+                using (var _db = new CosmeticsContext())
                 {
                     GetListProductResponse result = new GetListProductResponse();
 

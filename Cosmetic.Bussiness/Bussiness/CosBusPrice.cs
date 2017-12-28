@@ -3,12 +3,11 @@ using Cosmetic.Bussiness.Requests;
 using Cosmetic.Bussiness.Responses;
 using Cosmetic.Core.Request;
 using Cosmetic.Core.Response;
-using Cosmetic.DataModel.Model;
+using Cosmetic.DataModel;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using Cosmetic.DataModel.Entities;
 
 namespace Cosmetic.Bussiness.Bussiness
 {
@@ -30,7 +29,7 @@ namespace Cosmetic.Bussiness.Bussiness
             var response = new CosApiResponse();
             try
             {
-                using (var _db = new CosContext())
+                using (var _db = new CosmeticsContext())
                 {
                     var Price = request.Price;
                     if (string.IsNullOrEmpty(Price.Id)) /* insert */
@@ -39,10 +38,10 @@ namespace Cosmetic.Bussiness.Bussiness
                         var priceDB = new Price()
                         {
                             Id = Price.Id,
-                            Price1 = Price.Price,
+                            Prices = Price.Price,
                             ToDate = Price.ToDate,
                             FromDate = Price.FromDate,
-                            ProductID = Price.ProductId
+                            ProductId = Price.ProductId
 
                         };
                         _db.Prices.Add(priceDB);
@@ -50,10 +49,10 @@ namespace Cosmetic.Bussiness.Bussiness
                     else /* update */
                     {
                         var PriceDB = _db.Prices.Where(o => o.Id == Price.Id).FirstOrDefault();
-                        PriceDB.Price1 = Price.Price;
+                        PriceDB.Prices = Price.Price;
                         PriceDB.ToDate = Price.ToDate;
                         PriceDB.FromDate = Price.FromDate;
-                        PriceDB.ProductID = Price.ProductId;
+                        PriceDB.ProductId = Price.ProductId;
                     }
 
                     /* save data */
@@ -74,7 +73,7 @@ namespace Cosmetic.Bussiness.Bussiness
             var response = new CosApiResponse();
             try
             {
-                using (var _db = new CosContext())
+                using (var _db = new CosmeticsContext())
                 {
                     /* delete */
                     var PriceDB = _db.Prices.Where(o => o.Id == request.ID /*&& o.Status == Constants.Estatus.Active*/ ).FirstOrDefault();
@@ -102,7 +101,7 @@ namespace Cosmetic.Bussiness.Bussiness
             var response = new CosApiResponse();
             try
             {
-                using (var _db = new CosContext())
+                using (var _db = new CosmeticsContext())
                 {
                     GetDetailPriceResponse result = new GetDetailPriceResponse();
 
@@ -115,8 +114,8 @@ namespace Cosmetic.Bussiness.Bussiness
                             Id = PriceDB.Id,                            
                             ToDate = PriceDB.ToDate,
                             FromDate = PriceDB.FromDate,
-                            ProductId = PriceDB.ProductID,
-                            Price = PriceDB.Price1,                            
+                            ProductId = PriceDB.ProductId,
+                            Price = PriceDB.Prices,                            
                         };
                         result.Price = responsePrice;
                         response.Data = result;
@@ -137,7 +136,7 @@ namespace Cosmetic.Bussiness.Bussiness
             var response = new CosApiResponse();
             try
             {
-                using (var _db = new CosContext())
+                using (var _db = new CosmeticsContext())
                 {
                     GetListPriceResponse result = new GetListPriceResponse();
 
@@ -149,8 +148,8 @@ namespace Cosmetic.Bussiness.Bussiness
                         Id = o.Id,
                         ToDate = o.ToDate,
                         FromDate = o.FromDate,
-                        ProductId = o.ProductID,
-                        Price = o.Price1,
+                        ProductId = o.ProductId,
+                        Price = o.Prices,
                     }).ToList();
 
                     /* response data  */

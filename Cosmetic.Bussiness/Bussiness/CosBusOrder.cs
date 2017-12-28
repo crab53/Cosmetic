@@ -3,12 +3,13 @@ using Cosmetic.Bussiness.Requests;
 using Cosmetic.Bussiness.Responses;
 using Cosmetic.Core.Request;
 using Cosmetic.Core.Response;
-using Cosmetic.DataModel.Model;
+using Cosmetic.DataModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Cosmetic.DataModel.Entities;
 
 namespace Cosmetic.Bussiness.Bussiness
 {
@@ -30,7 +31,7 @@ namespace Cosmetic.Bussiness.Bussiness
             var response = new CosApiResponse();
             try
             {
-                using (var _db = new CosContext())
+                using (var _db = new CosmeticsContext())
                 {
                     var Order = request.Order;
                     if (string.IsNullOrEmpty(Order.Id)) /* insert */
@@ -42,7 +43,7 @@ namespace Cosmetic.Bussiness.Bussiness
                             CustomerId = Order.CustomerId,
                             ReceiptNo = Order.ReceiptNo,
                             OrderNo = Order.OrderNo,
-                            Totalbil = Order.TotalBil,
+                            TotalBil = Order.TotalBil,
                             Discount = Order.Discount,
                         };
                         _db.Orders.Add(orderDB);
@@ -53,7 +54,7 @@ namespace Cosmetic.Bussiness.Bussiness
                         orderDB.CustomerId = Order.CustomerId;
                         orderDB.ReceiptNo = Order.ReceiptNo;
                         orderDB.OrderNo = Order.OrderNo;
-                        orderDB.Totalbil = Order.TotalBil;
+                        orderDB.TotalBil = Order.TotalBil;
                         orderDB.Discount = Order.Discount;
                     }
 
@@ -75,7 +76,7 @@ namespace Cosmetic.Bussiness.Bussiness
             var response = new CosApiResponse();
             try
             {
-                using (var _db = new CosContext())
+                using (var _db = new CosmeticsContext())
                 {
                     /* delete */
                     var OrderDB = _db.Orders.Where(o => o.Id == request.ID /*&& o.Status == Constants.Estatus.Active*/ ).FirstOrDefault();
@@ -104,7 +105,7 @@ namespace Cosmetic.Bussiness.Bussiness
             var response = new CosApiResponse();
             try
             {
-                using (var _db = new CosContext())
+                using (var _db = new CosmeticsContext())
                 {
                     GetDetailOrderResponse result = new GetDetailOrderResponse();
 
@@ -118,7 +119,7 @@ namespace Cosmetic.Bussiness.Bussiness
                             CustomerId = OrderDB.CustomerId,
                             ReceiptNo = OrderDB.ReceiptNo,
                             OrderNo = OrderDB.OrderNo,
-                            TotalBil = OrderDB.Totalbil,
+                            TotalBil = OrderDB.TotalBil,
                             Discount = OrderDB.Discount,
                         };
                         result.Order = responseOrder;
@@ -140,7 +141,7 @@ namespace Cosmetic.Bussiness.Bussiness
             var response = new CosApiResponse();
             try
             {
-                using (var _db = new CosContext())
+                using (var _db = new CosmeticsContext())
                 {
                     GetListOrderResponse result = new GetListOrderResponse();
 
@@ -153,7 +154,7 @@ namespace Cosmetic.Bussiness.Bussiness
                         CustomerId = o.CustomerId,
                         OrderNo = o.OrderNo,
                         ReceiptNo = o.ReceiptNo,
-                        TotalBil = o.Totalbil,
+                        TotalBil = o.TotalBil,
                         Discount = o.Discount,
                     }).ToList();
 

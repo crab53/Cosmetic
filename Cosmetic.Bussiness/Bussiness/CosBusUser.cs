@@ -3,11 +3,10 @@ using Cosmetic.Bussiness.Requests;
 using Cosmetic.Bussiness.Responses;
 using Cosmetic.Core.Request;
 using Cosmetic.Core.Response;
-using Cosmetic.DataModel.Model;
+using Cosmetic.DataModel;
+using Cosmetic.DataModel.Entities;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Cosmetic.Bussiness.Bussiness
@@ -30,7 +29,7 @@ namespace Cosmetic.Bussiness.Bussiness
             var response = new CosApiResponse();
             try
             {
-                using (var _db = new CosContext())
+                using (var _db = new CosmeticsContext())
                 {
                     var user = request.User;
                     if (string.IsNullOrEmpty(user.Id)) /* insert */
@@ -72,7 +71,7 @@ namespace Cosmetic.Bussiness.Bussiness
             var response = new CosApiResponse();
             try
             {
-                using (var _db = new CosContext())
+                using (var _db = new CosmeticsContext())
                 {
                     /* delete */
                     var UserDB = _db.Users.Where(o => o.Id == request.ID /*&& o.Status == Constants.Estatus.Active*/ ).FirstOrDefault();
@@ -99,7 +98,7 @@ namespace Cosmetic.Bussiness.Bussiness
             var response = new CosApiResponse();
             try
             {
-                using (var _db = new CosContext())
+                using (var _db = new CosmeticsContext())
                 {
                     GetDetailUserResponse result = new GetDetailUserResponse();
 
@@ -114,8 +113,8 @@ namespace Cosmetic.Bussiness.Bussiness
                             Email = UserDB.Email,
                             Password = UserDB.Password,
                             Phone = UserDB.Phone,
-                            Active = UserDB.Active,
-                            RoleId = UserDB.RoleId,
+                            Active = UserDB.IsActive,
+                            RoleId = UserDB.RoleID,
                         };
                         result.User = responseUser;
                         response.Data = result;
@@ -136,7 +135,7 @@ namespace Cosmetic.Bussiness.Bussiness
             var response = new CosApiResponse();
             try
             {
-                using (var _db = new CosContext())
+                using (var _db = new CosmeticsContext())
                 {
                     GetListUserResponse result = new GetListUserResponse();
 
@@ -150,8 +149,8 @@ namespace Cosmetic.Bussiness.Bussiness
                         Email = o.Email,
                         Password = o.Password,
                         Phone = o.Phone,
-                        Active = o.Active,
-                        RoleId = o.RoleId,
+                        Active = o.IsActive,
+                        RoleId = o.RoleID,
                     }).ToList();
 
                     /* response data  */
