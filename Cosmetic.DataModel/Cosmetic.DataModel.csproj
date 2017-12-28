@@ -51,82 +51,38 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\Category.cs">
-      <DependentUpon>CosContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\CosContext.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CosContext.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\CosContext.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CosContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\CosContext.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CosContext.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Customer.cs">
-      <DependentUpon>CosContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Module.cs">
-      <DependentUpon>CosContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\ModulesOnRole.cs">
-      <DependentUpon>CosContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Order.cs">
-      <DependentUpon>CosContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\OrderDetail.cs">
-      <DependentUpon>CosContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Price.cs">
-      <DependentUpon>CosContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Product.cs">
-      <DependentUpon>CosContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Role.cs">
-      <DependentUpon>CosContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\sysdiagram.cs">
-      <DependentUpon>CosContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\User.cs">
-      <DependentUpon>CosContext.tt</DependentUpon>
-    </Compile>
+    <Compile Include="CosmeticsContext.cs" />
+    <Compile Include="Entities\BaseEntities.cs" />
+    <Compile Include="Entities\Category.cs" />
+    <Compile Include="Entities\Customer.cs" />
+    <Compile Include="Entities\Module.cs" />
+    <Compile Include="Entities\ModulesOnRole.cs" />
+    <Compile Include="Entities\Order.cs" />
+    <Compile Include="Entities\OrderDetail.cs" />
+    <Compile Include="Entities\Price.cs" />
+    <Compile Include="Entities\Product.cs" />
+    <Compile Include="Entities\Role.cs" />
+    <Compile Include="Entities\User.cs" />
+    <Compile Include="Mapping\CategoryMap.cs" />
+    <Compile Include="Mapping\CustomerMap.cs" />
+    <Compile Include="Mapping\ModuleMap.cs" />
+    <Compile Include="Mapping\ModuleOnRoleMap.cs" />
+    <Compile Include="Mapping\OrderDetailMap.cs" />
+    <Compile Include="Mapping\OrderMap.cs" />
+    <Compile Include="Mapping\PriceMap.cs" />
+    <Compile Include="Mapping\ProductMap.cs" />
+    <Compile Include="Mapping\RoleMap.cs" />
+    <Compile Include="Mapping\UserMap.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <EntityDeploy Include="Model\CosContext.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>CosContext.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="Model\CosContext.edmx.diagram">
-      <DependentUpon>CosContext.edmx</DependentUpon>
-    </None>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Model\CosContext.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>CosContext.Context.cs</LastGenOutput>
-      <DependentUpon>CosContext.edmx</DependentUpon>
-    </Content>
-    <Content Include="Model\CosContext.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CosContext.edmx</DependentUpon>
-      <LastGenOutput>CosContext.cs</LastGenOutput>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
