@@ -19,7 +19,11 @@ namespace CosmeticAPI.Controllers
         public const string Product_Delete = "api/v1/Product/Delete";
         public const string Product_Get_ID = "api/v1/Product/Get/ID";
         public const string Product_Get_List = "api/v1/Product/Get/List";
-
+        //--------------------------------------------------------------------------------
+        public const string Category_CreateUpdate = "api/v1/Category/CreateUpdate";
+        public const string Category_Delete = "api/v1/Category/Delete";
+        public const string Category_Get_ID = "api/v1/Category/Get/ID";
+        public const string Category_Get_List = "api/v1/Category/Get/List";
         #endregion
     }
 }
