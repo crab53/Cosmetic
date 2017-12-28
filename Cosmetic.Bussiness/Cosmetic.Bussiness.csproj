@@ -59,11 +59,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bussiness\CosBusBase.cs" />
+    <Compile Include="Bussiness\CosBusCategory.cs" />
     <Compile Include="Bussiness\CosBusProduct.cs" />
+    <Compile Include="DTO\CategoryDTO.cs" />
     <Compile Include="DTO\ProductDTO.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Requests\CategoryRequests.cs" />
     <Compile Include="Requests\ProductRequest.cs" />
+    <Compile Include="Responses\CategoryResponse.cs" />
     <Compile Include="Responses\ProductReponse.cs" />
   </ItemGroup>
   <ItemGroup>
