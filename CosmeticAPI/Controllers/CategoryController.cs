@@ -14,7 +14,7 @@ namespace CosmeticAPI.Controllers
     {
         // POST: Create or Update Category
         [HttpPost, Route(ApiRoutes.Category_CreateUpdate)]
-        public async Task<CosApiResponse> CreateUpdateCategory(CategoryRequests request)
+        public async Task<CosApiResponse> CreateUpdateCategory(CategoryRequest request)
         {
             NSLog.Logger.Info("CreateUpdateCategory", request);
             return await CosBusCategory.Instance.CreateUpdateCategory(request);

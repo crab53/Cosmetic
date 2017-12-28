@@ -26,6 +26,7 @@ namespace Cosmetic.Bussiness.Bussiness
         }
         static CosBusProduct() { }
 
+        // Create Update Product
         public async Task<CosApiResponse> CreateUpdateProduct(CreateUpdateProductRequest request)
         {
             var response = new CosApiResponse();

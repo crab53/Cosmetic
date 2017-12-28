@@ -26,7 +26,7 @@ namespace Cosmetic.Bussiness.Bussiness
         static CosBusCategory()
         { }
         // Create Or Update Category
-        public async Task<CosApiResponse> CreateUpdateCategory(CategoryRequests requests)
+        public async Task<CosApiResponse> CreateUpdateCategory(CategoryRequest requests)
         {
             var response = new CosApiResponse();
             try
@@ -41,8 +41,7 @@ namespace Cosmetic.Bussiness.Bussiness
                         {
                             Id = Cate.Id,
                             Name = Cate.Name,
-                            ParentId = Cate.ParentId,
-                            Status = Cate.Status,
+                            ParentId = Cate.ParentId,                           
                         };
                         _db.Categories.Add(cateDB);
                     }
@@ -50,8 +49,7 @@ namespace Cosmetic.Bussiness.Bussiness
                     {
                         var cateDB = _db.Categories.Where(x => x.Id == Cate.Id).FirstOrDefault();
                         cateDB.Name = Cate.Name;
-                        cateDB.ParentId = Cate.ParentId;
-                        cateDB.Status = Cate.Status;                      
+                        cateDB.ParentId = Cate.ParentId;                                            
                     }
                     if (_db.SaveChanges() > 0)
                         response.Success = true;
@@ -111,8 +109,7 @@ namespace Cosmetic.Bussiness.Bussiness
                     {
                         Id = x.Id,
                         Name = x.Name,
-                        ParentId =x.ParentId,
-                        Status = x.Status
+                        ParentId =x.ParentId,                        
                     }).ToList();
                     response.Data = result;
                     NSLog.Logger.Info("Response Get List Category", response);
@@ -138,8 +135,7 @@ namespace Cosmetic.Bussiness.Bussiness
                         {
                             Id = cateDB.Id,
                             Name = cateDB.Name,
-                            ParentId = cateDB.ParentId,
-                            Status = cateDB.Status
+                            ParentId = cateDB.ParentId,                            
                         };                        
                     }
                     else

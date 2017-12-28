@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace Cosmetic.Bussiness.Requests
 {
-   public class CategoryRequests: RequestModelBase
+    public class OrderRequest : RequestModelBase
     {
-        public CategoryDTO Category { get; set; }
+        public OrderDTO Order { get; set; }
     }
 }
