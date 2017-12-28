@@ -57,8 +57,8 @@ namespace Cosmetic.Bussiness.Bussiness
                         response.Success = true;
                     else
                     {
-                        response.Message = "Unable to add new or update category";
-                        NSLog.Logger.Info("Response Create or Update Category");
+                        response.Message = "Unable to add new or update category";                        
+                        NSLog.Logger.Info("Response Create or Update Category",response);
                     }
                 }
             }
@@ -89,7 +89,7 @@ namespace Cosmetic.Bussiness.Bussiness
                     else
                     {
                         response.Message = " Unable to find category";
-                        NSLog.Logger.Info("Response Delete Category");
+                        NSLog.Logger.Info("Response Delete Category", response);
                     }
                 }
             }
