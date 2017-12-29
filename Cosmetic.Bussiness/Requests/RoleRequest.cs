@@ -1,5 +1,5 @@
 ﻿using Cosmetic.Core.Request;
-using Cosmetic.DataModel.Entities;
+using Cosmetic.DataModel.Model;
 
 namespace Cosmetic.Bussiness.Requests
 {

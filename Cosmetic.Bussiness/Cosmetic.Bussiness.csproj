@@ -62,7 +62,6 @@
     <Compile Include="Bussiness\CosBusCategory.cs" />
     <Compile Include="Bussiness\CosBusCustomer.cs" />
     <Compile Include="Bussiness\CosBusOrder.cs" />
-    <Compile Include="Bussiness\CosBusPrice.cs" />
     <Compile Include="Bussiness\CosBusProduct.cs" />
     <Compile Include="Bussiness\CosBusRole.cs" />
     <Compile Include="Bussiness\CosBusUser.cs" />
@@ -101,7 +100,7 @@
       <Name>Cosmetic.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\Cosmetic.DataModel\Cosmetic.DataModel.csproj">
-      <Project>{7f4167bb-ab9c-4710-b732-441acb0a3d47}</Project>
+      <Project>{FB9C82BA-4949-40B1-8E6B-295A14A1B998}</Project>
       <Name>Cosmetic.DataModel</Name>
     </ProjectReference>
   </ItemGroup>

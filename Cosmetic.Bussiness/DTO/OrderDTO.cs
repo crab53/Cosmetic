@@ -11,7 +11,7 @@ namespace Cosmetic.Bussiness.DTO
         public string OrderNo { get; set; }
         public string ReceiptNo { get; set; }
         public string CustomerId { get; set; }
-        public int TotalBil { get; set; }
+        public int TotalBill { get; set; }
         public int? Discount { get; set; }
         
     }

@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7F4167BB-AB9C-4710-B732-441ACB0A3D47}</ProjectGuid>
+    <ProjectGuid>{FB9C82BA-4949-40B1-8E6B-295A14A1B998}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>Cosmetic.DataModel</RootNamespace>
     <AssemblyName>Cosmetic.DataModel</AssemblyName>
@@ -51,28 +51,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CosmeticsContext.cs" />
-    <Compile Include="Entities\BaseEntities.cs" />
-    <Compile Include="Entities\Category.cs" />
-    <Compile Include="Entities\Customer.cs" />
-    <Compile Include="Entities\Module.cs" />
-    <Compile Include="Entities\ModulesOnRole.cs" />
-    <Compile Include="Entities\Order.cs" />
-    <Compile Include="Entities\OrderDetail.cs" />
-    <Compile Include="Entities\Price.cs" />
-    <Compile Include="Entities\Product.cs" />
-    <Compile Include="Entities\Role.cs" />
-    <Compile Include="Entities\User.cs" />
-    <Compile Include="Mapping\CategoryMap.cs" />
-    <Compile Include="Mapping\CustomerMap.cs" />
-    <Compile Include="Mapping\ModuleMap.cs" />
-    <Compile Include="Mapping\ModuleOnRoleMap.cs" />
-    <Compile Include="Mapping\OrderDetailMap.cs" />
-    <Compile Include="Mapping\OrderMap.cs" />
-    <Compile Include="Mapping\PriceMap.cs" />
-    <Compile Include="Mapping\ProductMap.cs" />
-    <Compile Include="Mapping\RoleMap.cs" />
-    <Compile Include="Mapping\UserMap.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Model\Category.cs" />
+    <Compile Include="Model\CosContext.cs" />
+    <Compile Include="Model\Customer.cs" />
+    <Compile Include="Model\Module.cs" />
+    <Compile Include="Model\ModulesOnRole.cs" />
+    <Compile Include="Model\Order.cs" />
+    <Compile Include="Model\OrderDetail.cs" />
+    <Compile Include="Model\Price.cs" />
+    <Compile Include="Model\Product.cs" />
+    <Compile Include="Model\Role.cs" />
+    <Compile Include="Model\sysdiagram.cs" />
+    <Compile Include="Model\User.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -80,9 +71,5 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

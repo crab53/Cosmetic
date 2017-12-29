@@ -4,7 +4,7 @@ using Cosmetic.Bussiness.Responses;
 using Cosmetic.Core.Request;
 using Cosmetic.Core.Response;
 using Cosmetic.DataModel;
-using Cosmetic.DataModel.Entities;
+using Cosmetic.DataModel.Model;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -29,7 +29,7 @@ namespace Cosmetic.Bussiness.Bussiness
             var response = new CosApiResponse();
             try
             {
-                using (var _db = new CosmeticsContext())
+                using (var _db = new CosContext())
                 {
                     var customer = request.Customer;
                     if (string.IsNullOrEmpty(customer.Id)) /* insert */
@@ -71,7 +71,7 @@ namespace Cosmetic.Bussiness.Bussiness
             var response = new CosApiResponse();
             try
             {
-                using (var _db = new CosmeticsContext())
+                using (var _db = new CosContext())
                 {
                     /* delete */
                     var customerDB = _db.Customers.Where(o => o.Id == request.ID /*&& o.Status == Constants.Estatus.Active*/ ).FirstOrDefault();
@@ -100,7 +100,7 @@ namespace Cosmetic.Bussiness.Bussiness
             var response = new CosApiResponse();
             try
             {
-                using (var _db = new CosmeticsContext())
+                using (var _db = new CosContext())
                 {
                     GetDetailCustomerResponse result = new GetDetailCustomerResponse();
 
@@ -138,7 +138,7 @@ namespace Cosmetic.Bussiness.Bussiness
             var response = new CosApiResponse();
             try
             {
-                using (var _db = new CosmeticsContext())
+                using (var _db = new CosContext())
                 {
                     GetListCustomerResponse result = new GetListCustomerResponse();
 
