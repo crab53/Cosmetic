@@ -8,6 +8,7 @@ using Cosmetic.Bussiness.Requests;
 using Cosmetic.Bussiness.Responses;
 using Cosmetic.DataModel;
 using Cosmetic.DataModel.Model;
+using Cosmetic.Core.Common;
 
 namespace Cosmetic.Bussiness.Bussiness
 {
@@ -42,15 +43,19 @@ namespace Cosmetic.Bussiness.Bussiness
                             Name = pro.Name,
                             CategoryId = pro.CateID,
                             Price = (decimal)pro.Price,
+                            Status = (byte)Constants.EStatus.Deleted,
                         };
                         _db.Products.Add(proDB);
                     }
                     else /* update */
                     {
-                        var proDB = _db.Products.Where(o => o.Id == pro.ID).FirstOrDefault();
-                        proDB.Price = (decimal)pro.Price;
-                        proDB.Name = pro.Name;
-                        proDB.CategoryId = pro.CateID;
+                        var proDB = _db.Products.Where(o => o.Id == pro.ID && o.Status == (byte)Constants.EStatus.Actived).FirstOrDefault();
+                        if (proDB != null)
+                        {
+                            proDB.Price = (decimal)pro.Price;
+                            proDB.Name = pro.Name;
+                            proDB.CategoryId = pro.CateID;
+                        }
                     }
 
                     /* save data */
@@ -74,10 +79,10 @@ namespace Cosmetic.Bussiness.Bussiness
                 using (var _db = new CosContext())
                 {
                     /* delete */
-                    var proDB = _db.Products.Where(o => o.Id == request.ID /*&& o.Status == Constants.Estatus.Active*/ ).FirstOrDefault();
+                    var proDB = _db.Products.Where(o => o.Id == request.ID && o.Status == (byte)Constants.EStatus.Actived).FirstOrDefault();
                     if (proDB != null)
                     {
-                        //proDB.Status = Constants.EStatus.Deleted;
+                        proDB.Status = (byte)Constants.EStatus.Deleted;
 
                         /* Save change data */
                         if (_db.SaveChanges() > 0)
@@ -105,7 +110,7 @@ namespace Cosmetic.Bussiness.Bussiness
                     GetIDProductResponse result = new GetIDProductResponse();
                     
                     /* get product */
-                    var proDB = _db.Products.Where(o => o.Id == request.ID /*&& o.Status == Constants.Estatus.Active*/ ).FirstOrDefault();
+                    var proDB = _db.Products.Where(o => o.Id == request.ID && o.Status == (byte)Constants.EStatus.Actived).FirstOrDefault();
                     if (proDB != null)
                     {
                         var responsePro = new ProductDTO()
@@ -137,7 +142,7 @@ namespace Cosmetic.Bussiness.Bussiness
                     GetListProductResponse result = new GetListProductResponse();
 
                     /* get product */
-                    var query = _db.Products.Where(o =>true/* o.Status == Constants.EStatus.Actived*/);
+                    var query = _db.Products.Where(o => o.Status== (byte)Constants.EStatus.Actived);
 
                     result.ListProd = query.Select(o => new ProductDTO()
                     {
