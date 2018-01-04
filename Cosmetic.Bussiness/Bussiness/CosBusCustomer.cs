@@ -1,6 +1,7 @@
 ﻿using Cosmetic.Bussiness.DTO;
 using Cosmetic.Bussiness.Requests;
 using Cosmetic.Bussiness.Responses;
+using Cosmetic.Core.Common;
 using Cosmetic.Core.Request;
 using Cosmetic.Core.Response;
 using Cosmetic.DataModel;
@@ -47,7 +48,7 @@ namespace Cosmetic.Bussiness.Bussiness
                     }
                     else /* update */
                     {
-                        var customerDB = _db.Customers.Where(o => o.Id == customer.Id).FirstOrDefault();
+                        var customerDB = _db.Customers.Where(o => o.Id == customer.Id && o.Status == (byte)Constants.EStatus.Actived).FirstOrDefault();
                         customerDB.Name = customer.Name;
                         customerDB.Email = customer.Email;
                         customerDB.City = customer.City;
@@ -74,10 +75,10 @@ namespace Cosmetic.Bussiness.Bussiness
                 using (var _db = new CosContext())
                 {
                     /* delete */
-                    var customerDB = _db.Customers.Where(o => o.Id == request.ID /*&& o.Status == Constants.Estatus.Active*/ ).FirstOrDefault();
+                    var customerDB = _db.Customers.Where(o => o.Id == request.ID && o.Status == (byte)Constants.EStatus.Actived).FirstOrDefault();
                     if (customerDB != null)
                     {
-                        //proDB.Status = Constants.EStatus.Deleted;
+                        customerDB.Status = (byte)Constants.EStatus.Deleted;
 
                         /* Save change data */
                         if (_db.SaveChanges() > 0)
@@ -105,7 +106,7 @@ namespace Cosmetic.Bussiness.Bussiness
                     GetDetailCustomerResponse result = new GetDetailCustomerResponse();
 
                     /* get Customer */
-                    var customerDB = _db.Customers.Where(o => o.Id == request.ID /*&& o.Status == Constants.Estatus.Active*/ ).FirstOrDefault();
+                    var customerDB = _db.Customers.Where(o => o.Id == request.ID && o.Status == (byte)Constants.EStatus.Actived).FirstOrDefault();
                     if (customerDB != null)
                     {
                         var responseUser = new CustomersDTO()

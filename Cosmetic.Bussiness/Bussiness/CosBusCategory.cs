@@ -1,6 +1,7 @@
 ﻿using Cosmetic.Bussiness.DTO;
 using Cosmetic.Bussiness.Requests;
 using Cosmetic.Bussiness.Responses;
+using Cosmetic.Core.Common;
 using Cosmetic.Core.Request;
 using Cosmetic.Core.Response;
 using Cosmetic.DataModel;
@@ -48,7 +49,7 @@ namespace Cosmetic.Bussiness.Bussiness
                     }
                     else
                     {
-                        var cateDB = _db.Categories.Where(x => x.Id == Cate.Id).FirstOrDefault();
+                        var cateDB = _db.Categories.Where(x => x.Id == Cate.Id && x.Status == (byte)Constants.EStatus.Actived).FirstOrDefault();
                         cateDB.Name = Cate.Name;
                         cateDB.ParentId = Cate.ParentId;                                            
                     }
@@ -77,9 +78,10 @@ namespace Cosmetic.Bussiness.Bussiness
                 using (var _db = new CosContext())
                 {
                     /* delete */
-                    var cateDB = _db.Categories.Where(x => x.Id == request.ID).FirstOrDefault();
+                    var cateDB = _db.Categories.Where(x => x.Id == request.ID && x.Status == (byte)Constants.EStatus.Actived).FirstOrDefault();
                     if(cateDB != null)
                     {
+                        cateDB.Status = (byte)Constants.EStatus.Deleted;
                         if (_db.SaveChanges() > 0)
                             response.Success = true;
                         else
@@ -105,7 +107,7 @@ namespace Cosmetic.Bussiness.Bussiness
                 using (var _db = new CosContext())
                 {
                     GetListCategoryResponse result = new GetListCategoryResponse();
-                    var query = _db.Categories.Where(x => true);
+                    var query = _db.Categories.Where(x => x.Status == (byte)Constants.EStatus.Actived);
                     result.ListCate = query.Select(x => new CategoryDTO()
                     {
                         Id = x.Id,
@@ -129,7 +131,7 @@ namespace Cosmetic.Bussiness.Bussiness
                 using (var _db = new CosContext())
                 {
                     GetIDCategoryResponse result = new GetIDCategoryResponse();
-                    var cateDB = _db.Categories.Where(x => x.Id == request.ID).FirstOrDefault();
+                    var cateDB = _db.Categories.Where(x => x.Id == request.ID && x.Status == (byte)Constants.EStatus.Actived).FirstOrDefault();
                     if(cateDB != null)
                     {
                         var responseCate = new CategoryDTO()
@@ -137,7 +139,9 @@ namespace Cosmetic.Bussiness.Bussiness
                             Id = cateDB.Id,
                             Name = cateDB.Name,
                             ParentId = cateDB.ParentId,                            
-                        };                        
+                        };
+                        result.Cate = responseCate;
+                        response.Data = result;
                     }
                     else
                     {

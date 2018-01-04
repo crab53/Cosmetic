@@ -1,6 +1,7 @@
 ﻿using Cosmetic.Bussiness.DTO;
 using Cosmetic.Bussiness.Requests;
 using Cosmetic.Bussiness.Responses;
+using Cosmetic.Core.Common;
 using Cosmetic.Core.Request;
 using Cosmetic.Core.Response;
 using Cosmetic.DataModel.Model;
@@ -44,7 +45,7 @@ namespace Cosmetic.Bussiness.Bussiness
                     }
                     else /* update */
                     {
-                        var roleDB = _db.Roles.Where(o => o.Id == role.Id).FirstOrDefault();
+                        var roleDB = _db.Roles.Where(o => o.Id == role.Id && o.Status == (byte)Constants.EStatus.Actived).FirstOrDefault();
                         roleDB.Name = role.Name;                        
                     }
 
@@ -69,10 +70,10 @@ namespace Cosmetic.Bussiness.Bussiness
                 using (var _db = new CosContext())
                 {
                     /* delete */
-                    var RoleDB = _db.Roles.Where(o => o.Id == request.ID /*&& o.Status == Constants.Estatus.Active*/ ).FirstOrDefault();
+                    var RoleDB = _db.Roles.Where(o => o.Id == request.ID && o.Status == (byte)Constants.EStatus.Actived).FirstOrDefault();
                     if (RoleDB != null)
-                    {                       
-
+                    {
+                        RoleDB.Status = (byte)Constants.EStatus.Deleted;
                         /* Save change data */
                         if (_db.SaveChanges() > 0)
                             response.Success = true;
@@ -99,7 +100,7 @@ namespace Cosmetic.Bussiness.Bussiness
                     GetDetailRoleResponse result = new GetDetailRoleResponse();
 
                     /* get Role */
-                    var RoleDB = _db.Roles.Where(o => o.Id == request.ID /*&& o.Status == Constants.Estatus.Active*/ ).FirstOrDefault();
+                    var RoleDB = _db.Roles.Where(o => o.Id == request.ID && o.Status == (byte)Constants.EStatus.Actived).FirstOrDefault();
                     if (RoleDB != null)
                     {
                         var responseRole = new RoleDTO()
@@ -132,7 +133,7 @@ namespace Cosmetic.Bussiness.Bussiness
                     GetListRoleResponse result = new GetListRoleResponse();
 
                     /* get Role */
-                    var query = _db.Roles.Where(o => true/* o.Status == Constants.EStatus.Actived*/);
+                    var query = _db.Roles.Where(o => o.Status == (byte)Constants.EStatus.Actived);
 
                     result.ListRole = query.Select(o => new RoleDTO()
                     {

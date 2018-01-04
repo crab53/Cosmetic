@@ -1,6 +1,7 @@
 ﻿using Cosmetic.Bussiness.DTO;
 using Cosmetic.Bussiness.Requests;
 using Cosmetic.Bussiness.Responses;
+using Cosmetic.Core.Common;
 using Cosmetic.Core.Request;
 using Cosmetic.Core.Response;
 using Cosmetic.DataModel;
@@ -47,7 +48,7 @@ namespace Cosmetic.Bussiness.Bussiness
                     }
                     else /* update */
                     {
-                        var userDB = _db.Users.Where(o => o.Id == user.Id).FirstOrDefault();
+                        var userDB = _db.Users.Where(o => o.Id == user.Id && o.Status == (byte)Constants.EStatus.Actived).FirstOrDefault();
                         userDB.Name = user.Name;
                         userDB.Email = user.Email;
                         userDB.Password = user.Password;
@@ -74,9 +75,10 @@ namespace Cosmetic.Bussiness.Bussiness
                 using (var _db = new CosContext())
                 {
                     /* delete */
-                    var UserDB = _db.Users.Where(o => o.Id == request.ID /*&& o.Status == Constants.Estatus.Active*/ ).FirstOrDefault();
+                    var UserDB = _db.Users.Where(o => o.Id == request.ID && o.Status == (byte)Constants.EStatus.Actived).FirstOrDefault();
                     if (UserDB != null)
                     {
+                        UserDB.Status = (byte)Constants.EStatus.Deleted;
                         /* Save change data */
                         if (_db.SaveChanges() > 0)
                             response.Success = true;
@@ -103,7 +105,7 @@ namespace Cosmetic.Bussiness.Bussiness
                     GetDetailUserResponse result = new GetDetailUserResponse();
 
                     /* get User */
-                    var UserDB = _db.Users.Where(o => o.Id == request.ID /*&& o.Status == Constants.Estatus.Active*/ ).FirstOrDefault();
+                    var UserDB = _db.Users.Where(o => o.Id == request.ID && o.Status == (byte)Constants.EStatus.Actived).FirstOrDefault();
                     if (UserDB != null)
                     {
                         var responseUser = new UserDTO()
@@ -140,7 +142,7 @@ namespace Cosmetic.Bussiness.Bussiness
                     GetListUserResponse result = new GetListUserResponse();
 
                     /* get User */
-                    var query = _db.Users.Where(o => true/* o.Status == Constants.EStatus.Actived*/);
+                    var query = _db.Users.Where(o =>o.Status == (byte)Constants.EStatus.Actived);
 
                     result.ListUser = query.Select(o => new UserDTO()
                     {

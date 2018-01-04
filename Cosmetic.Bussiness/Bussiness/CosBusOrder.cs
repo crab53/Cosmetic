@@ -1,6 +1,7 @@
 ﻿using Cosmetic.Bussiness.DTO;
 using Cosmetic.Bussiness.Requests;
 using Cosmetic.Bussiness.Responses;
+using Cosmetic.Core.Common;
 using Cosmetic.Core.Request;
 using Cosmetic.Core.Response;
 using Cosmetic.DataModel;
@@ -50,7 +51,7 @@ namespace Cosmetic.Bussiness.Bussiness
                     }
                     else /* update */
                     {
-                        var orderDB = _db.Orders.Where(o => o.Id == Order.Id).FirstOrDefault();
+                        var orderDB = _db.Orders.Where(o => o.Id == Order.Id && o.Status == (byte)Constants.EStatus.Actived).FirstOrDefault();
                         orderDB.CustomerId = Order.CustomerId;
                         orderDB.ReceiptNo = Order.ReceiptNo;
                         orderDB.OrderNo = Order.OrderNo;
@@ -79,11 +80,11 @@ namespace Cosmetic.Bussiness.Bussiness
                 using (var _db = new CosContext())
                 {
                     /* delete */
-                    var OrderDB = _db.Orders.Where(o => o.Id == request.ID /*&& o.Status == Constants.Estatus.Active*/ ).FirstOrDefault();
+                    var OrderDB = _db.Orders.Where(o => o.Id == request.ID && o.Status == (byte)Constants.EStatus.Actived).FirstOrDefault();
                     if (OrderDB != null)
                     {
-                        
 
+                        OrderDB.Status = (byte)Constants.EStatus.Deleted;
                         /* Save change data */
                         if (_db.SaveChanges() > 0)
                             response.Success = true;
@@ -110,7 +111,7 @@ namespace Cosmetic.Bussiness.Bussiness
                     GetDetailOrderResponse result = new GetDetailOrderResponse();
 
                     /* get order */
-                    var OrderDB = _db.Orders.Where(o => o.Id == request.ID /*&& o.Status == Constants.Estatus.Active*/ ).FirstOrDefault();
+                    var OrderDB = _db.Orders.Where(o => o.Id == request.ID && o.Status == (byte)Constants.EStatus.Actived).FirstOrDefault();
                     if (OrderDB != null)
                     {
                         var responseOrder = new OrderDTO()
@@ -146,7 +147,7 @@ namespace Cosmetic.Bussiness.Bussiness
                     GetListOrderResponse result = new GetListOrderResponse();
 
                     /* get oder */
-                    var query = _db.Orders.Where(o => true/* o.Status == Constants.EStatus.Actived*/);
+                    var query = _db.Orders.Where(o =>  o.Status == (byte)Constants.EStatus.Actived);
 
                     result.ListOrder = query.Select(o => new OrderDTO()
                     {
